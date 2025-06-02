@@ -41,10 +41,11 @@ float& getTimerById(const char* id) {
 _ScopedTimer::_ScopedTimer(const char* timerID) : m_TimerID(timerID) {
 	m_StartTime = high_resolution_clock::now(); 
 }
-_ScopedTimer::~_ScopedTimer() {
+void _ScopedTimer::recordElapsed() {
 	high_resolution_clock::time_point now = high_resolution_clock::now();
 	float elapsedTime = duration<float, std::chrono::seconds::period>(now - m_StartTime).count();
-	getTimerById(m_TimerID) = elapsedTime; 
+	getTimerById(m_TimerID) = elapsedTime;
 }
+_ScopedTimer::~_ScopedTimer() { recordElapsed(); }
 
 }

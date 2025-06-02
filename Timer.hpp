@@ -32,6 +32,7 @@ class _ScopedTimer {
 public:
 
 	_ScopedTimer(const char* timerID);
+	void recordElapsed(); 
 	~_ScopedTimer();
 
 private:
